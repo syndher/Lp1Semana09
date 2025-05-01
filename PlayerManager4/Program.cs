@@ -67,6 +67,12 @@ namespace PlayerManager4
                         ListPlayersWithScoreGreaterThan();
                         break;
                     case "4":
+                        ListPlayersSortedByName(false);
+                        break;
+                    case "5":
+                        ListPlayersSortedByName(true);
+                        break;
+                    case "6":
                         Console.WriteLine("Bye!");
                         break;
                     default:
@@ -80,7 +86,7 @@ namespace PlayerManager4
                 Console.WriteLine("\n");
 
                 // Loop keeps going until players choses to quit (option 4)
-            } while (option != "4");
+            } while (option != "6");
         }
 
         /// <summary>
@@ -91,7 +97,9 @@ namespace PlayerManager4
             Console.WriteLine("1 for inserting a player");
             Console.WriteLine("2 for listing all players in order");
             Console.WriteLine("3 for listing all players with higher score than the one you picked");
-            Console.WriteLine("4 for shutting down");
+            Console.WriteLine("4 for descending alphabetical order");
+            Console.WriteLine("5 for ascending alphabetical order");
+            Console.WriteLine("6 for shutting down");
         }
 
         /// <summary>
@@ -119,14 +127,12 @@ namespace PlayerManager4
         /// </param>
         private static void ListPlayers(IEnumerable<Player> playersToList)
         {
-            List<Player> sortedList = new List<Player>(playersToList);
-            sortedList.Sort();
-
-            foreach (Player player in sortedList)
+            foreach (Player player in playersToList)
             {
-                Console.WriteLine(player);
+            Console.WriteLine(player);
             }
         }
+
 
         /// <summary>
         /// Show all players with a score higher than a user-specified value.
@@ -155,6 +161,13 @@ namespace PlayerManager4
                     yield return player;
                 }
             }
+        }
+        private void ListPlayersSortedByName(bool ascending)
+        {
+            CompareByName comparer = new CompareByName(ascending);
+            List<Player> sortedList = new List<Player>(playerList);
+            sortedList.Sort(comparer);
+            ListPlayers(sortedList);
         }
     }
 }
