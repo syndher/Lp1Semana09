@@ -90,7 +90,7 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         {
             Console.WriteLine("1 for inserting a player");
             Console.WriteLine("2 for listing all players");
-            Console.WriteLine("3 for listing all players with higher score than the one you pick");
+            Console.WriteLine("3 for listing all players with higher score than the one you picked");
             Console.WriteLine("4 for shutting down");
         }
 
@@ -145,14 +145,16 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// </returns>
         private IEnumerable<Player> GetPlayersWithScoreGreaterThan(int minScore)
         {
-        foreach (Player player in playerList)
-        {
-            if (player.Score > minScore)
-            {
-                yield return player;
-            }
-        }
+            List<Player> result = new List<Player>();
 
+            foreach (Player player in playerList)
+            {
+                if (player.Score > minScore)
+                {
+                    result.Add(player);
+                }
+            }
+            return result;
         }
     }
 }
