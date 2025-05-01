@@ -1,6 +1,11 @@
-﻿namespace Players
+﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Emit;
+
+namespace Players
 {
-    public class Player
+    public class Player : IComparable<Player>
     {
         public string Name { get;  }
         public int Score { get;  }
@@ -13,6 +18,13 @@
         {
             return $"{Name} - Score: {Score}";
         }
+        public int CompareTo(Player other)
+        {
+            if (other == null) return 1;
+            return other.Score.CompareTo(this.Score);
+            
+        }
         
     }
+    
 }

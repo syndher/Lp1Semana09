@@ -89,7 +89,7 @@ namespace PlayerManager3
         private void ShowMenu()
         {
             Console.WriteLine("1 for inserting a player");
-            Console.WriteLine("2 for listing all players");
+            Console.WriteLine("2 for listing all players in order");
             Console.WriteLine("3 for listing all players with higher score than the one you picked");
             Console.WriteLine("4 for shutting down");
         }
@@ -119,7 +119,10 @@ namespace PlayerManager3
         /// </param>
         private static void ListPlayers(IEnumerable<Player> playersToList)
         {
-            foreach (Player player in playersToList)
+            List<Player> sortedList = new List<Player>(playersToList);
+            sortedList.Sort();
+
+            foreach (Player player in sortedList)
             {
                 Console.WriteLine(player);
             }
