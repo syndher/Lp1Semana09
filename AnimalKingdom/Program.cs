@@ -38,10 +38,10 @@ namespace AnimalKingdom
                 Console.Write($"{a.GetType().Name}{a.Sound()}");
                 if (a is IMammal)
                     Console.Write(
-                        $"\t| No.Nipples = {(a as IMammal).NumberOfNipples}");
+                        $"\t| No.Nipples = {(a as IMammal).NumberOfNipples()}");
                 if (a is ICanFly)
                     Console.Write(
-                        $"\t| No.Wings = {(a as ICanFly).NumberOfWings}");
+                        $"\t| No.Wings = {(a as ICanFly).NumberOfWings()}");
                 Console.WriteLine();
             }
         }
