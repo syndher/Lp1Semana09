@@ -1,39 +1,54 @@
 # UML Animal Kingdom
-``` mermaid
+
+```mermaid
 
 classDiagram
-    class Program{
+    class Animal {
+        + virtual string Sound ()
     }
 
-    class Bat{
-        +NumberOfNipples(4)
-        +NumberOfWings(2)
-    }
-    class Bee{
-        +NumberOfWings(4)
-    }
-    class Cat{
-        +NumberOfNipples(8)
-    }
-    class Dog{
-        +NumberOfNipples(10)
-    }
-    class IMammal{
-        +NumberOfNipples(amount)
-    }
-    class ICanFly{
-        +NumberOfWings(amount)
+    class Cat {
+        + override string Sound ()
+        + NumberOfNipples : int
     }
 
+    class Dog {
+        + override string Sound ()
+        + NumberOfNipples : int
+    }
 
-Program <.. ICanFly
-Program <.. IMammal
+    class Bat {
+        + override string Sound ()
+        + NumberOfWings : int
+        + NumberOfNipples : int
+    }
 
-ICanFly <|.. Bat
-ICanFly <|.. Bee
+    class Bee {
+        + override string Sound ()
+        + NumberOfWings : int
+    }
 
-IMammal <|.. Cat
-IMammal <|.. Dog
-IMammal <|.. Bat
+    class IMammal {
+        <<interface>>
+        + NumberOfNipples : int
+    }
 
-```
+    class ICanFly {
+        <<interface>>
+        + NumberOfWings : int
+    }
+
+    class Program {
+        - void main$ 
+    }
+
+Program <|.. Animal
+Animal <|-- Cat
+Animal <|-- Dog
+Animal <|-- Bat
+Animal <|-- Bee
+Cat ..|> IMammal
+Dog ..|> IMammal
+Bat ..|> IMammal
+Bat ..|> ICanFly
+Bee ..|> ICanFly
